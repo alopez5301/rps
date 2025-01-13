@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #4A148C, #8E24AA);
+            color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 3rem;
+        }
+        .button {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #7B1FA2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #9C27B0;
+            transform: scale(1.1);
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        .choices {
+            display: flex;
+            justify-content: center;
+        }
+        .choice {
+            margin: 0 20px;
+            text-align: center;
+        }
+        .choice img {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .choice img:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <div class="choices">
+        <div class="choice" onclick="play('rock')">
+            <img src="https://i.imgur.com/8h7PA1T.png" alt="Rock">
+            <p>Rock</p>
+        </div>
+        <div class="choice" onclick="play('paper')">
+            <img src="https://i.imgur.com/0rAABgr.png" alt="Paper">
+            <p>Paper</p>
+        </div>
+        <div class="choice" onclick="play('scissors')">
+            <img src="https://i.imgur.com/OYRd7Cg.png" alt="Scissors">
+            <p>Scissors</p>
+        </div>
+    </div>
+    <div class="result" id="result"></div>
 
+    <script>
+        function play(userChoice) {
+            const choices = ['rock', 'paper', 'scissors'];
+            const cpuChoice = choices[Math.floor(Math.random() * choices.length)];
+            let result;
+
+            if (userChoice === cpuChoice) {
+                result = "It's a draw!";
+            } else if (
+                (userChoice === 'rock' && cpuChoice === 'scissors') ||
+                (userChoice === 'paper' && cpuChoice === 'rock') ||
+                (userChoice === 'scissors' && cpuChoice === 'paper')
+            ) {
+                result = 'You win!';
+            } else {
+                result = 'You lose!';
+            }
+
+            document.getElementById('result').innerHTML = `
+                You chose <strong>${userChoice}</strong>. <br>
+                CPU chose <strong>${cpuChoice}</strong>. <br>
+                <strong>${result}</strong>`;
+        }
+    </script>
+</body>
+</html>
